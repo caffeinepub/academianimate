@@ -1,0 +1,530 @@
+/* =====================================================
+   AcademiAnimate – Custom Animations
+   ===================================================== */
+
+/* Page fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fadeIn 0.4s ease both;
+}
+
+/* Staggered item reveal */
+@keyframes staggerIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.stagger-in {
+  animation: staggerIn 0.4s ease both;
+}
+
+/* Subject card hover lift already done via Tailwind */
+
+/* Loading spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loader-ring {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #818cf8;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+/* ─── Animation Container ─────────────────────────────── */
+.anim-container {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ─── Floating hero shapes ───────────────────────────── */
+.floating-shapes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+@keyframes floatUp {
+  0% {
+    transform: translateY(100%) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.15;
+  }
+  90% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateY(-120%) rotate(360deg);
+    opacity: 0;
+  }
+}
+.floating-shape {
+  position: absolute;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #818cf8, #22d3ee);
+  opacity: 0;
+  animation: floatUp 6s ease-in-out infinite;
+}
+.floating-shape:nth-child(2n) {
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f472b6, #818cf8);
+  width: 16px;
+  height: 16px;
+}
+.floating-shape:nth-child(3n) {
+  border-radius: 2px;
+  background: linear-gradient(135deg, #34d399, #22d3ee);
+  width: 12px;
+  height: 12px;
+}
+
+/* ─── MATH: rotating polygons ────────────────────────── */
+@keyframes rotateSlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotateFast {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.anim-shape {
+  position: absolute;
+  border: 2px solid;
+  opacity: 0.7;
+}
+.anim-shape.triangle {
+  width: 80px;
+  height: 80px;
+  border-color: #818cf8;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background: rgba(129, 140, 248, 0.15);
+  animation: rotateSlow 4s linear infinite;
+}
+.anim-shape.square {
+  width: 60px;
+  height: 60px;
+  border-color: #22d3ee;
+  border-radius: 4px;
+  background: rgba(34, 211, 238, 0.1);
+  animation: rotateFast 3s linear infinite;
+  margin-left: 80px;
+}
+.anim-shape.circle {
+  width: 50px;
+  height: 50px;
+  border-color: #f472b6;
+  border-radius: 50%;
+  background: rgba(244, 114, 182, 0.1);
+  animation: rotateSlow 5s linear infinite reverse;
+  margin-left: -80px;
+  margin-top: 40px;
+}
+.anim-formula {
+  position: absolute;
+  bottom: 16px;
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  color: #818cf8;
+  opacity: 0.8;
+  animation: fadeIn 1s ease both;
+}
+
+/* ─── SCIENCE / PHYSICS: orbiting particles ─────────── */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(50%) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(50%) rotate(-360deg);
+  }
+}
+@keyframes orbitReverse {
+  from {
+    transform: rotate(0deg) translateX(60%) rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg) translateX(60%) rotate(360deg);
+  }
+}
+.orbit-ring {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border: 1.5px solid rgba(34, 211, 238, 0.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orbit-particle {
+  width: 10px;
+  height: 10px;
+  background: #22d3ee;
+  border-radius: 50%;
+  position: absolute;
+  animation: orbit 2s linear infinite;
+  box-shadow: 0 0 6px #22d3ee;
+}
+.orbit-ring:nth-child(2) .orbit-particle {
+  background: #818cf8;
+  box-shadow: 0 0 6px #818cf8;
+  animation: orbitReverse 3s linear infinite;
+}
+.orbit-nucleus {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #f472b6, #818cf8);
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 14px rgba(244, 114, 182, 0.6);
+  animation: scalePulse 1.5s ease-in-out infinite;
+}
+@keyframes scalePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+/* ─── BIOLOGY: DNA helix ─────────────────────────────── */
+.dna-helix {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.dna-pair {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: dnaTwist 1.5s ease-in-out infinite alternate;
+}
+@keyframes dnaTwist {
+  from {
+    transform: scaleX(1) translateX(-8px);
+  }
+  to {
+    transform: scaleX(-1) translateX(-8px);
+  }
+}
+.dna-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.dna-dot.left {
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+.dna-dot.right {
+  background: #818cf8;
+  box-shadow: 0 0 8px #818cf8;
+}
+.dna-line {
+  flex: 1;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #34d399, #818cf8);
+  opacity: 0.6;
+}
+
+/* ─── PHYSICS: gravity ball + wave ──────────────────── */
+@keyframes gravityBounce {
+  0% {
+    transform: translateY(-60px);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translateY(30px);
+    animation-timing-function: ease-out;
+  }
+  75% {
+    transform: translateY(-30px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.gravity-ball {
+  width: 32px;
+  height: 32px;
+  background: radial-gradient(circle, #f59e0b, #ef4444);
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.5);
+  animation: gravityBounce 1.8s ease infinite;
+}
+.wave-line {
+  position: absolute;
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+@keyframes waveBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+.wave-dot {
+  width: 6px;
+  height: 6px;
+  background: #22d3ee;
+  border-radius: 50%;
+  animation: waveBob 1s ease-in-out infinite;
+}
+
+/* ─── CHEMISTRY: molecule ───────────────────────────── */
+.molecule-center {
+  width: 20px;
+  height: 20px;
+  background: #f97316;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 12px #f97316;
+  animation: scalePulse 2s ease-in-out infinite;
+}
+.molecule-arm {
+  position: absolute;
+  width: 55px;
+  height: 2px;
+  background: rgba(249, 115, 22, 0.3);
+  transform-origin: left center;
+  left: calc(50% + 10px);
+  top: 50%;
+  margin-top: -1px;
+  animation: rotateSlow 6s linear infinite;
+}
+.molecule-atom {
+  width: 14px;
+  height: 14px;
+  background: #fb923c;
+  border-radius: 50%;
+  position: absolute;
+  right: -7px;
+  top: -6px;
+  box-shadow: 0 0 8px #fb923c;
+}
+
+/* ─── HISTORY: timeline ─────────────────────────────── */
+@keyframes scrollTimeline {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+.timeline-scroll {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  animation: scrollTimeline 8s linear infinite;
+  white-space: nowrap;
+}
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background: #fbbf24;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #fbbf24;
+}
+.timeline-year {
+  font-size: 0.75rem;
+  color: #fbbf24;
+  font-family: monospace;
+}
+
+/* ─── COMPUTER SCIENCE: binary stream ───────────────── */
+@keyframes codeFlow {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+.code-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.code-line {
+  font-family: monospace;
+  font-size: 1rem;
+  color: #a78bfa;
+  letter-spacing: 0.2em;
+  animation: codeFlow 3s ease-in-out infinite;
+  text-shadow: 0 0 8px #a78bfa;
+}
+
+/* ─── ECONOMICS: bar chart ───────────────────────────── */
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 120px;
+  padding-bottom: 2px;
+}
+@keyframes barGrow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+.chart-bar {
+  width: 20px;
+  background: linear-gradient(to top, #f472b6, #818cf8);
+  border-radius: 4px 4px 0 0;
+  transform-origin: bottom;
+  animation: barGrow 0.6s ease both;
+  box-shadow: 0 0 6px rgba(244, 114, 182, 0.4);
+}
+.chart-baseline {
+  position: absolute;
+  bottom: 28px;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── LITERATURE: book ───────────────────────────────── */
+.book-container {
+  position: relative;
+  width: 120px;
+  height: 90px;
+}
+.book-cover {
+  position: absolute;
+  inset: 0;
+  background: #9f1239;
+  border-radius: 4px 8px 8px 4px;
+  box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.4);
+}
+.book-spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  background: #7f1d1d;
+  border-radius: 4px 0 0 4px;
+}
+@keyframes turnPage {
+  0% {
+    transform: perspective(400px) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(400px) rotateY(-90deg);
+  }
+  100% {
+    transform: perspective(400px) rotateY(-180deg);
+  }
+}
+.book-page {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 80px;
+  height: 74px;
+  background: #fef3c7;
+  border-radius: 2px;
+  transform-origin: left center;
+  animation: turnPage 3s ease-in-out infinite alternate;
+}
+.book-page.page2 {
+  animation-delay: -1.5s;
+  background: #fde68a;
+}
+
+/* ─── GEOGRAPHY: globe ───────────────────────────────── */
+.globe {
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(45, 212, 191, 0.4);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  animation: rotateSlow 8s linear infinite;
+}
+.globe-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(45, 212, 191, 0.3);
+}
+.globe-meridian {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(45, 212, 191, 0.3);
+  transform-origin: center;
+  animation: rotateSlow 4s linear infinite;
+}
